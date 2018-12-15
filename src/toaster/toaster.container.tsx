@@ -31,7 +31,6 @@ interface IToasterContainerState {
 export default class ToasterContainer extends React.Component<IToasterContainerProps, IToasterContainerState> {
 
     toastIdToTimeoutId: { [key: string]: number } = {};
-    nextToastId: number = 0;
 
     constructor(props: IToasterContainerProps) {
         super(props);
@@ -59,7 +58,7 @@ export default class ToasterContainer extends React.Component<IToasterContainerP
             newToastWrappers = this.markToastAsDismissed(wrapper.id);
         }
 
-        const newToastWrapper = { toast, id: this.nextToastId++, dismissed: false };
+        const newToastWrapper = { toast, id: uuid.v1(), dismissed: false };
 
         if (newestOnTop) {
             newToastWrappers.unshift(newToastWrapper);
