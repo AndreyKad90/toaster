@@ -58,13 +58,9 @@ export default class ToasterContainer extends React.Component<IToasterContainerP
             newToastWrappers = this.markToastAsDismissed(wrapper.id);
         }
 
-        const newToastWrapper = { toast, id: uuid.v1(), dismissed: false };
-
-        if (newestOnTop) {
-            newToastWrappers.unshift(newToastWrapper);
-        } else {
-            newToastWrappers.unshift(newToastWrapper);
-        }
+        newToastWrappers.unshift(
+            { toast, id: uuid.v1(), dismissed: false }
+        );
 
         this.setState({
             toastWrappers: newToastWrappers
@@ -116,7 +112,7 @@ export default class ToasterContainer extends React.Component<IToasterContainerP
 
     private renderToasts = (): JSX.Element[] => {
         const { containerId, transitionTime, newestOnTop } = this.props.config;
-
+        
         return this.state.toastWrappers.map(({id, dismissed, toast}, index) => {
             const allProps = {
                 ...toast.props,
